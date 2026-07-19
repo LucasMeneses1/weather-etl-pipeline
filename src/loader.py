@@ -32,5 +32,5 @@ def load_weather(data: dict):
         """)
 
         # <- aqui falta apenas executar o INSERT
-        connection.execute(sql, data)
+        # connection.execute(sql, data)
         
