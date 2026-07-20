@@ -4,10 +4,11 @@ from database import get_engine
 
 def load_weather(data: dict):
     """
-    Grava uma medição meteorológica no banco de dados.
+    Grava uma medicao meteorologica no banco de dados.
 
     Args:
-        data (dict): Dados transformados.
+        data (dict): Dados transformados, incluindo city,
+        latitude e longitude (colunas NOT NULL na tabela).
     """
 
     engine = get_engine()
@@ -16,6 +17,9 @@ def load_weather(data: dict):
 
         sql = text("""
             INSERT INTO weather.weather_measurements (
+                city,
+                latitude,
+                longitude,
                 observation_time,
                 temperature,
                 humidity,
@@ -23,6 +27,9 @@ def load_weather(data: dict):
                 pressure
             )
             VALUES (
+                :city,
+                :latitude,
+                :longitude,
                 :observation_time,
                 :temperature,
                 :humidity,
@@ -31,6 +38,4 @@ def load_weather(data: dict):
             )
         """)
 
-        # <- aqui falta apenas executar o INSERT
-        # connection.execute(sql, data)
-        
+        connection.execute(sql, data)

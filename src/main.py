@@ -5,6 +5,11 @@ from transformer import transform_weather
 from loader import load_weather
 from logger import logger
 
+CITY_NAME = "Fortaleza"
+LATITUDE = -3.7319
+LONGITUDE = -38.5267
+
+
 def main():
     engine = get_engine()
 
@@ -16,11 +21,15 @@ def main():
             for row in result:
                 print(row[0])
 
-        extracted_data = extract_weather(-3.7319, -38.5267)
+        extracted_data = extract_weather(LATITUDE, LONGITUDE)
 
-        transformed_data = transform_weather(extracted_data)
+        transformed_data = transform_weather(
+            extracted_data, CITY_NAME, LATITUDE, LONGITUDE
+        )
 
         load_weather(transformed_data)
+
+        print("\n Pipeline executado e dados gravados com sucesso.")
 
     except Exception as erro:
         print(f"\n ERRO AO CONECTAR: {erro}")
