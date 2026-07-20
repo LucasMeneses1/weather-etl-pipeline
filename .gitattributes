@@ -1,0 +1,14 @@
+# Normaliza todo arquivo de texto para usar LF (Unix-style) tanto no
+# repositório quanto no working directory, independente do sistema
+# operacional de quem clonar o projeto. Evita diffs "fantasma" causados
+# por diferenças de final de linha entre Windows (CRLF) e Linux/Mac (LF).
+* text=auto eol=lf
+
+*.py    text
+*.sql   text
+*.md    text
+*.MD    text
+*.txt   text
+.gitignore      text
+.gitattributes  text
+.env.example    text
