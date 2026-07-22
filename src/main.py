@@ -3,7 +3,9 @@ from database import get_engine
 from extractor import extract_weather
 from transformer import transform_weather
 from loader import load_weather
-from logger import logger
+from logger import setup_logging
+
+import logging
 
 CITY_NAME = "Fortaleza"
 LATITUDE = -3.7319
@@ -11,15 +13,23 @@ LONGITUDE = -38.5267
 
 
 def main():
+    setup_logging()
+    logger = logging.getLogger(__name__)
+
+    logger.info("Pipeline started")
+
     engine = get_engine()
 
     try:
+        logger.info("Connecting to database")
+
         with engine.connect() as connection:
+            logger.info("Connection established")
 
             result = connection.execute(text("SELECT version();"))
 
             for row in result:
-                print(row[0])
+                logger.info(f"PostgreSQL version: {row[0]}")
 
         extracted_data = extract_weather(LATITUDE, LONGITUDE)
 
@@ -29,10 +39,10 @@ def main():
 
         load_weather(transformed_data)
 
-        print("\n Pipeline executado e dados gravados com sucesso.")
+        logger.info("Pipeline finished")
 
     except Exception as erro:
-        print(f"\n ERRO AO CONECTAR: {erro}")
+        logger.error(f"Pipeline failed: {erro}", exc_info=True)
 
 
 if __name__ == "__main__":
