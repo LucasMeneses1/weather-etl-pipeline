@@ -1,5 +1,4 @@
 import logging
-
 from sqlalchemy import text
 from database import get_engine
 
