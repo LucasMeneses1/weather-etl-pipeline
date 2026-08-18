@@ -1,4 +1,5 @@
 # Weather ETL Pipeline
+![CI](https://github.com/LucasMeneses1/weather-etl-pipeline/actions/workflows/ci.yml/badge.svg)
 
 A small, production-style ETL pipeline that extracts current weather data from
 the [Open-Meteo](https://open-meteo.com/) API, transforms it, and loads it into
