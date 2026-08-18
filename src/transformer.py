@@ -3,7 +3,9 @@ import logging
 logger = logging.getLogger(__name__)
 
 
-def transform_weather(weather_data: dict, city: str, latitude: float, longitude: float) -> dict:
+def transform_weather(
+    weather_data: dict, city: str, latitude: float, longitude: float
+) -> dict:
     """
     Transforma os dados meteorologicos retornados pela API
     para o formato utilizado pela aplicacao.
@@ -31,7 +33,7 @@ def transform_weather(weather_data: dict, city: str, latitude: float, longitude:
             "temperature": weather_data["current"]["temperature_2m"],
             "humidity": weather_data["current"]["relative_humidity_2m"],
             "wind_speed": weather_data["current"]["wind_speed_10m"],
-            "pressure": weather_data["current"]["pressure_msl"]
+            "pressure": weather_data["current"]["pressure_msl"],
         }
     except (KeyError, TypeError) as erro:
         logger.error(f"Transformation failed: unexpected data format ({erro})")
