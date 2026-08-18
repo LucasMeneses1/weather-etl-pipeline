@@ -18,3 +18,7 @@ jobs:
         run: pip install -r requirements-dev.txt
       - name: Run tests
         run: pytest -v
+      - name: Lint
+        run: |
+          flake8 src/
+          black --check src/
